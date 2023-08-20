@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(const MaterialApp(home: MyHome()));
 
@@ -169,10 +170,21 @@ class _QRViewExampleState extends State<QRViewExample> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
+      openUrl(scanData.code.toString());
       setState(() {
+        print("scanData ${scanData.code.toString()}");
         result = scanData;
       });
     });
+  }
+
+  void openUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
