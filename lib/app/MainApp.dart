@@ -9,12 +9,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => const MainScreen(),
-        '/generate_qr': (context) => const GenerateQrScreen(),
-        '/scan_qr': (context) => const QRViewExample()
-      },
+    return Scaffold(
+      body: MaterialApp(
+        routes: {
+          '/': (context) => const MainScreen(),
+          '/generate_qr': (context) => const GenerateQrScreen(),
+          '/scan_qr': (context) => const QRViewExample()
+        },
+      ),
     );
   }
 }

@@ -66,8 +66,11 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                    SizedBox(
+                      width: 500,
+                      child: Text(
+                          'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}'),
+                    )
                   else
                     const Text('Scan a code'),
                   Row(
@@ -172,7 +175,6 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       openUrl(scanData.code.toString());
       setState(() {
-        print("scanData ${scanData.code.toString()}");
         result = scanData;
       });
     });
